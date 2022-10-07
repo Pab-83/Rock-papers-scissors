@@ -13,7 +13,7 @@ function play_round(computer_choice, player_choice) {
     
     if (computer_choice == "scissors" && player_choice == "rock") {
         console.log("Computer Choice: " + computer_choice + "\nPlayer Choice: " + player_choice);
-        return "Player_wins";
+        return "player_wins";
     }
     else if (computer_choice == "rock" && player_choice == "scissors") {
         console.log("Computer Choice: " + computer_choice + "\nPlayer Choice: " + player_choice);
@@ -22,11 +22,11 @@ function play_round(computer_choice, player_choice) {
     
     else if (choices.indexOf(computer_choice) < choices.indexOf(player_choice)) {
         console.log("Computer Choice: " + computer_choice + "\nPlayer Choice: " + player_choice);
-        return "Player_wins";
+        return "player_wins";
     }
     else if (choices.indexOf(player_choice) < choices.indexOf(computer_choice)) {
         console.log("Computer Choice: " + computer_choice + "\nPlayer Choice: " + player_choice);
-        return "Computer_wins";
+        return "computer_wins";
     };
 }
 
