@@ -9,7 +9,6 @@ function computer_selector() {
 
 function play_round(computer_choice, player_choice) {
     if (choices.indexOf(computer_choice) == choices.indexOf(player_choice)) {
-        console.log("Computer Choice: " + computer_choice + "\nPlayer Choice: " + player_choice);
         return "Draw";
     };
     
@@ -28,35 +27,36 @@ function play_round(computer_choice, player_choice) {
     };
 }
 
-for (i = 0; i <= 4; i++) {
-    let computer_choice = computer_selector();
-    let player_choice = prompt("Choose: Rock, Paper, Scissors").toLowerCase();
-    winner = play_round(computer_choice, player_choice);
+const buttons = document.querySelectorAll("button");
+const score = document.querySelector(".score")
+score.style = "white-space: pre-line ; background-color: red";
 
-    if (winner == "player_wins") {
-        player_score += 1;
-        console.log("Player choose: " + player_choice + "\nThe Computer choose: " + computer_choice);
-        console.log("Player wins");
-    }
-    else if (winner == "computer_wins") {
-        computer_score += 1;
-        console.log("Player choose: " + player_choice + "\nThe Computer choose: " + computer_choice);
-        console.log("Computer wins");
-    }
-    else {
-        console.log("Draw");
-    }
-
-    console.log("Player Score: " + player_score + " Computer Score: " + computer_score);
-};
-
-if (player_score > computer_score) {
-    console.log("Player wins the match!");
+function checkWinner() {
+    if (player_score >= 5 || computer_score >= 5) {
+        if (player_score >= 5) {
+            score.replaceChildren();
+            score.textContent = "Player Wins!";
+        }
+        else if (computer_score >= 5) {
+            score.replaceChildren();
+            score.textContent = "Computer Wins!";
+        };
+    };
 }
-else if (computer_score > player_score) {
-    console.log("Computer wins the match!");
-}
-else {
-    console.log("It's a Draw!");
-}
+   
+buttons.forEach(button => button.addEventListener('click', function (e) { 
+        let player_choice = e.target.className;
+        let computer_choice = computer_selector();
+        winner = play_round(computer_choice, player_choice);
+        if (winner == "player_wins") {
+            player_score += 1;
+        } 
+        else if(winner == "computer_wins") {
+            computer_score += 1;
+        };
+    score.textContent = "Player Score: " + player_score + "     Computer Score: " + computer_score;
+    score.textContent += "\nPlayer Choice is: " + player_choice + " and Computer Choice is: " + computer_choice +  '\n';
+    score.textContent += winner;
 
+    checkWinner();
+}));
